@@ -1,0 +1,20 @@
+{
+  "name": "design",
+  "authors": [
+    "Akash Gaonkar <akashgaonkar@gmail.com>",
+    "Miles Rufat-Latre <miles.rufatlatre@colorado.edu>"
+  ],
+  "description": "A webpage to explain its own design decisions.",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
