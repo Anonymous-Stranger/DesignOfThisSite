@@ -1,0 +1,11 @@
+.no-transitions-while-pageload * {
+  /* 
+    THIS CLASS IS REMOVED AFTER PAGE LOAD BY A FUNCTION IN global.js
+    Edits to the name should be reflected in that file.
+  */
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important; }
+
+/*# sourceMappingURL=global.css.map */
