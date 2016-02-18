@@ -13,17 +13,9 @@
 
         <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
-        <link rel='import' href='bower_components/iron-flex-layout/classes/iron-flex-layout.html'/>
-        <link rel='import' href='bower_components/iron-icons/iron-icons.html'/>
-
-        <link rel='import' href='bower_components/paper-header-panel/paper-header-panel.html'/>
-        <link rel='import' href='bower_components/paper-icon-button/paper-icon-button.html'/>
-        <link rel='import' href='bower_components/paper-toolbar/paper-toolbar.html'/>
-        <link rel='import' href='bower_components/paper-styles/paper-styles-classes.html'/>
-
         <link rel='import' href='app-theme.html'/>
 
-        <link rel='import' href='elements/logo-dots/logo-dots.html'/>
+        <link rel='import' href='elements/dots-page/dots-page.html'/>
 
         <link rel='stylesheet' href='css/global.css'/>
 
@@ -31,24 +23,10 @@
 
 	</head>
 
-	<body class='fullbleed layout vertical no-transitions-while-pageload'>
-		<paper-header-panel class='flex' mode='waterfall'>
-            <paper-toolbar id='page_header_small'>
-                <paper-icon-button icon='menu'></paper-icon-button>
-                <logo-dots style='height: 40px; width: 200px'></logo-dots>
-            </paper-toolbar>
-            <div style='height: 2000px'>
-                <paper-toolbar id='page_header_large' class='tall'>
-                    <div class='bottom fit layout vertical center'>
-                        <logo-dots></logo-dots>
-                        <h2 class='paper-font-display1'>
-                            <span class='accented'>Design</span>
-                            Of This Site
-                        </h2>
-                    </div>
-                </paper-toolbar>
-            </div>
-        </paper-header-panel>
+	<body class='fullbleed'>
+		
+        <dots-page class='fullbleed layout vertical'></dots-page>
+
 	</body>
 
 </html>

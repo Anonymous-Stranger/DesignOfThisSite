@@ -1,0 +1,94 @@
+
+<link rel='import' href='../../bower_components/polymer/polymer.html'/>
+
+<link rel='import' href='../../bower_components/iron-flex-layout/classes/iron-flex-layout.html'/>
+<link rel='import' href='../../bower_components/iron-icons/iron-icons.html'/>
+
+<link rel='import' href='../../bower_components/paper-drawer-panel/paper-drawer-panel.html'/>
+<link rel='import' href='../../bower_components/paper-header-panel/paper-header-panel.html'/>
+<link rel='import' href='../../bower_components/paper-icon-button/paper-icon-button.html'/>
+<link rel='import' href='../../bower_components/paper-material/paper-material.html'/>
+<link rel='import' href='../../bower_components/paper-toolbar/paper-toolbar.html'/>
+<link rel='import' href='../../bower_components/paper-styles/paper-styles-classes.html'/>
+
+<link rel='import' href='../../elements/logo-dots/logo-dots.html'/>
+
+<dom-module id='dots-page'>
+
+    <template>
+        
+        <style>
+        
+            .accented {
+                color: var(--accent-color);
+            }
+
+            paper-toolbar * {
+                transition: all .18s ease-in;
+            }
+
+            logo-dots.small {
+                height: 36px;
+                width: 256px;
+            }
+
+            #drawer_toggle {
+                width: 48px;
+                height: 48px;
+            }
+
+            #page_header_large {
+                --paper-toolbar-height: 128px;
+                --paper-toolbar-sm-height: 112px;
+            }
+
+            #sections {
+                min-height: 40rem;
+            }
+        
+        </style>
+
+        <paper-drawer-panel force-narrow='force-narrow'>
+            <paper-material elevation="1" drawer>            
+                <paper-header-panel>
+                    <paper-toolbar>
+                        <logo-dots class='small'></logo-dots>
+                    </paper-toolbar>
+                    <div id='table_of_contents'>
+                        Table of contents goes here.
+                    </div>
+                </paper-header-panel>
+            </paper-material>
+
+            <paper-header-panel main class='flex' mode='seamed'>
+                <paper-toolbar>
+                    <paper-icon-button id='drawer_toggle' icon='menu' paper-drawer-toggle></paper-icon-button>
+                    <span class='paper-font-headline'>Section heading goes here (blank at start)</span>
+                </paper-toolbar>
+                <div>
+                    <paper-toolbar id='page_header_large' class='tall'>
+                        <div class='bottom fit layout vertical center'>
+                            <logo-dots></logo-dots>
+                            <h2 class='paper-font-display1'>
+                                <span class='accented'>Design</span>
+                                Of This Site
+                            </h2>
+                        </div>
+                    </paper-toolbar>
+                    <div id='sections'>
+                        sections go here
+                    </div>
+                </div>
+            <!-- </paper-header-panel> -->
+        
+        </paper-drawer-panel>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: "dots-page"
+        });
+    </script>
+
+</dom-module>
