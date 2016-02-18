@@ -16,8 +16,10 @@
         <link rel='import' href='bower_components/iron-flex-layout/classes/iron-flex-layout.html'/>
         <link rel='import' href='bower_components/iron-icons/iron-icons.html'/>
 
+        <link rel='import' href='bower_components/paper-drawer-panel/paper-drawer-panel.html'/>
         <link rel='import' href='bower_components/paper-header-panel/paper-header-panel.html'/>
         <link rel='import' href='bower_components/paper-icon-button/paper-icon-button.html'/>
+        <link rel='import' href='bower_components/paper-material/paper-material.html'/>
         <link rel='import' href='bower_components/paper-toolbar/paper-toolbar.html'/>
         <link rel='import' href='bower_components/paper-styles/paper-styles-classes.html'/>
 
@@ -31,24 +33,43 @@
 
 	</head>
 
-	<body class='fullbleed layout vertical no-transitions-while-pageload'>
-		<paper-header-panel class='flex' mode='waterfall'>
-            <paper-toolbar id='page_header_small'>
-                <paper-icon-button icon='menu'></paper-icon-button>
-                <logo-dots style='height: 40px; width: 200px'></logo-dots>
-            </paper-toolbar>
-            <div style='height: 2000px'>
-                <paper-toolbar id='page_header_large' class='tall'>
-                    <div class='bottom fit layout vertical center'>
-                        <logo-dots></logo-dots>
-                        <h2 class='paper-font-display1'>
-                            <span class='accented'>Design</span>
-                            Of This Site
-                        </h2>
+	<body class='fullbleed layout vertical'>
+		
+        <paper-drawer-panel force-narrow='force-narrow'>
+            <paper-material elevation="1" drawer>            
+                <paper-header-panel>
+                    <paper-toolbar>
+                        <logo-dots style='height: 36px; width: 256px'></logo-dots>
+                    </paper-toolbar>
+                    <div>
+                        Table of contents goes here.
                     </div>
+                </paper-header-panel>
+            </paper-material>
+
+            <paper-header-panel main class='flex' mode='seamed'>
+                <paper-toolbar>
+                    <paper-icon-button id='drawer_toggle' icon='menu' paper-drawer-toggle style='width: 48px; height: 48px;'></paper-icon-button>
+                    <span class='paper-font-headline'>Section heading goes here (blank at start)</span>
                 </paper-toolbar>
-            </div>
-        </paper-header-panel>
+                <div style='height: 2500px'>
+                    <paper-toolbar id='page_header_large' class='tall'>
+                        <div class='bottom fit layout vertical center'>
+                            <logo-dots></logo-dots>
+                            <h2 class='paper-font-display1'>
+                                <span class='accented'>Design</span>
+                                Of This Site
+                            </h2>
+                        </div>
+                    </paper-toolbar>
+                    <div>
+                        sections go here
+                    </div>
+                </div>
+            <!-- </paper-header-panel> -->
+        
+        </paper-drawer-panel>
+
 	</body>
 
 </html>
