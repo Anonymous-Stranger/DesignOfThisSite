@@ -13,6 +13,8 @@
 
 <link rel='import' href='../../elements/logo-dots/logo-dots.html'/>
 
+<link rel='import' href='../../elements/dots-section/dots-section.html'/>
+
 <dom-module id='dots-page'>
 
     <template>
@@ -48,14 +50,16 @@
         
         </style>
 
-        <paper-drawer-panel force-narrow='force-narrow'>
+        <paper-drawer-panel force-narrow>
             <paper-material elevation="1" drawer>            
                 <paper-header-panel>
                     <paper-toolbar>
                         <logo-dots class='small'></logo-dots>
                     </paper-toolbar>
-                    <div id='table_of_contents'>
-                        Table of contents goes here.
+                    <div id='table_of_contents' class='fit'>
+                        <template is='dom-repeat' items='[[settings.sections]]'>
+                            <a href='#[[titleToID(item.title)]]'>[[item.title]]</a> <br/>
+                        </template>
                     </div>
                 </paper-header-panel>
             </paper-material>
@@ -76,7 +80,9 @@
                         </div>
                     </paper-toolbar>
                     <div id='sections'>
-                        sections go here
+                        <template is='dom-repeat' items='[[settings.sections]]' as='section'>
+                            <dots-section id='[[titleToURL(section.title)]]' title='[[section.title]]' url='[[section.url]]'></dots-section>
+                        </template>
                     </div>
                 </div>
             <!-- </paper-header-panel> -->
@@ -87,7 +93,25 @@
 
     <script>
         Polymer({
-            is: "dots-page"
+
+            is: "dots-page",
+            
+            properties: {},
+            
+            ready: function() {
+                var self = this;
+
+                DOTSGlobal.XMLGetRequest("/json/sections.json",function(data){
+                    self.async(function() {
+                        this.set("settings", JSON.parse(data));
+                    });
+                });
+            },
+
+            titleToID: function(title) {
+                return "section-" + title.replace(' ','-').toLowerCase();
+            }
+
         });
     </script>
 
