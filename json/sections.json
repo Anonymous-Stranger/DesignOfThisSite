@@ -1,0 +1,56 @@
+{
+    "sections": [
+        {
+            "title": "Hello",
+            "url": "mkd/hello.mkd"
+        },
+        {
+            "title": "Story Mode",
+            "url": "mkd/mode_story.mkd"
+        },
+        {
+            "title": "Reference Mode",
+            "url": "mkd/mode_reference.mkd"
+        },
+        {
+            "title": "Header",
+            "url": "mkd/header.mkd"
+        },
+        {
+            "title": "Sidebar",
+            "url": "mkd/sidebar.mkd"
+        },
+        {
+            "title": "Sections",
+            "url": "mkd/sections.mkd"
+        },
+        {
+            "title": "Quick Lookups",
+            "url": "mkd/quick_lookups.mkd"
+        },
+        {
+            "title": "Return Button",
+            "url": "mkd/return_button.mkd"
+        },
+        {
+            "title": "Communication Style",
+            "url": "mkd/communication.mkd"
+        },
+        {
+            "title": "Material Design",
+            "url": "mkd/material.mkd"
+        },
+        {
+            "title": "Color Scheme",
+            "url": "mkd/colors.mkd"
+        },
+        {
+            "title": "Typography",
+            "url": "mkd/typography.mkd"
+        },
+        {
+            "title": "Goodbye",
+            "url": "mkd/goodbye.mkd"
+        }
+    ]
+}

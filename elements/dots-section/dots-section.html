@@ -1,0 +1,31 @@
+
+<link rel='import' href='../../bower_components/polymer/polymer.html'/>
+
+<dom-module id='dots-section'>
+	
+	<template>
+		
+		<h3>{{title}}</h3>
+		<div style='min-height: 20rem'>{{content}}</div>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: "dots-section",
+			properties: {
+				"title": String,
+				"url": String 
+			},
+			ready: function() {
+				var self = this;
+				
+				DOTSGlobal.XMLGetRequest(this.url, function(data){
+					self.set("content", data);
+				});
+
+			}
+		});
+	</script>
+
+</dom-module>
