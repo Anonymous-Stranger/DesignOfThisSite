@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="bower_components/polymer/polymer.html">
 
 <link rel="import" href="bower_components/paper-styles/classes/global.html">
+<link rel="import" href="bower_components/paper-styles/color.html">
 
 <!-- Taken from https://www.google.com/design/spec/style/color.html#color-ui-color-application -->
 
@@ -25,6 +26,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      */
     --primary-text-color: var(--light-theme-text-color);
     --primary-background-color: var(--light-theme-background-color);
+    --secondary-background-color: var(--light-theme-secondary-background);
     --secondary-text-color: var(--light-theme-secondary-color);
     --disabled-text-color: var(--light-theme-disabled-color);
     --divider-color: var(--light-theme-divider-color);
@@ -32,23 +34,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     /*
      * Primary and accent colors. Also see color.html for more colors.
      */
-    --primary-color: #3f51b5;  /* --paper-indigo-500 */
-    --light-primary-color: #c5cae9;  /* --paper-indigo-100 */
-    --dark-primary-color: #303f9f;  /* --paper-indigo-700 */
-
-    --accent-color: #ff4081;  /* --paper-pink-a200 */
-    --light-accent-color: #ff80ab;  /* --paper-pink-a100 */
-    --dark-accent-color: #f50057;  /* --paper-pink-a400 */
+    --primary-color: var(--paper-indigo-500);  /* --paper-indigo-500 */
+    --light-primary-color: var(--paper-indigo-100);  /* --paper-indigo-100 */
+    --dark-primary-color: var(--paper-indigo-700);  /* --paper-indigo-700 */
+    --accent-color: var(--paper-pink-a200);  /* --paper-pink-a200 */
+    --light-accent-color: var(--paper-pink-a100);  /* --paper-pink-a100 */
+    --dark-accent-color: var(--paper-pink-a400);  /* --paper-pink-a400 */
 
     /*
      * Material Design Light background theme
      */
-    --light-theme-background-color: #ffffff;
+    --light-theme-background-color: var(--paper-grey-50);
+    --light-theme-secondary-background: var(--paper-grey-300);
     --light-theme-base-color: #000000;
-    --light-theme-text-color: #212121;
-    --light-theme-secondary-color: #737373;  /* for secondary text and icons */
-    --light-theme-disabled-color: #9b9b9b;  /* disabled/hint text */
-    --light-theme-divider-color: #dbdbdb;
+    --light-theme-text-color: var(--paper-grey-900);
+    --light-theme-secondary-color: var(--paper-grey-600);  /* for secondary text and icons */
+    --light-theme-disabled-color: var(--paper-grey-500);  /* disabled/hint text */
+    --light-theme-divider-color: var(--paper-grey-400);
 
     /*
      * Material Design Dark background theme

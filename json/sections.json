@@ -1,4 +1,12 @@
 {
+    "quick_lookups": {
+        "header": "Header",
+        "banner": "Banner",
+        "sidebar": "Sidebar",
+        "sections": "Sections",
+        "quick_lookups": "Quick Lookups",
+        "return_button": "Return Button"
+    },
     "sections": [
         {
             "title": "Hello",
@@ -11,6 +19,10 @@
         {
             "title": "Reference Mode",
             "url": "mkd/mode_reference.mkd"
+        },
+        {
+            "title": "Banner",
+            "url": "mkd/banner.html"
         },
         {
             "title": "Header",

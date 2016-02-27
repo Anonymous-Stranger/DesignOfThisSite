@@ -7,7 +7,9 @@
 <link rel='import' href='../../bower_components/paper-drawer-panel/paper-drawer-panel.html'/>
 <link rel='import' href='../../bower_components/paper-header-panel/paper-header-panel.html'/>
 <link rel='import' href='../../bower_components/paper-icon-button/paper-icon-button.html'/>
+<link rel='import' href='../../bower_components/paper-item/paper-item.html'/>
 <link rel='import' href='../../bower_components/paper-material/paper-material.html'/>
+<link rel='import' href='../../bower_components/paper-menu/paper-menu.html'/>
 <link rel='import' href='../../bower_components/paper-toolbar/paper-toolbar.html'/>
 <link rel='import' href='../../bower_components/paper-styles/paper-styles-classes.html'/>
 
@@ -25,8 +27,20 @@
                 color: var(--accent-color);
             }
 
+            paper-header-panel {
+                background-color: var(--primary-background-color);
+            }
+
+            #page_content {
+                background-color: var(--secondary-background-color);
+            }
+
             paper-toolbar * {
                 transition: all .18s ease-in;
+            }
+
+            .help_icon {
+                margin-left: auto;
             }
 
             logo-dots.small {
@@ -45,9 +59,16 @@
             }
 
             #sections {
-                min-height: 40rem;
+                padding-top: 5px;
+                padding-bottom: 5px;
             }
-        
+
+            #table_of_contents .help_icon{
+                position: absolute;
+                bottom: 16px;
+                right: 16px;
+            }
+
         </style>
 
         <paper-drawer-panel force-narrow>
@@ -57,17 +78,21 @@
                         <logo-dots class='small'></logo-dots>
                     </paper-toolbar>
                     <div id='table_of_contents' class='fit'>
+                        <paper-menu>
                         <template is='dom-repeat' items='[[settings.sections]]'>
-                            <a href='#[[titleToID(item.title)]]'>[[item.title]]</a> <br/>
+                            <paper-item>[[item.title]]</paper-item>
                         </template>
+                        </paper-menu>
+                        <paper-icon-button icon='[[helpIcon]]' class='help_icon'></paper-icon-button>
                     </div>
                 </paper-header-panel>
             </paper-material>
 
-            <paper-header-panel main class='flex' mode='seamed'>
+            <paper-header-panel id='page_content' main class='flex' mode='waterfall'>
                 <paper-toolbar>
                     <paper-icon-button id='drawer_toggle' icon='menu' paper-drawer-toggle></paper-icon-button>
                     <span class='paper-font-headline'>Section heading goes here (blank at start)</span>
+                    <paper-icon-button icon='[[helpIcon]]' class='help_icon'></paper-icon-button>
                 </paper-toolbar>
                 <div>
                     <paper-toolbar id='page_header_large' class='tall'>
@@ -77,11 +102,13 @@
                                 <span class='accented'>Design</span>
                                 Of This Site
                             </h2>
+                            <div class='spacer'></div>
+                            <paper-icon-button icon='[[helpIcon]]' class='help_icon'></paper-icon-button>
                         </div>
                     </paper-toolbar>
                     <div id='sections'>
                         <template is='dom-repeat' items='[[settings.sections]]' as='section'>
-                            <dots-section id='[[titleToURL(section.title)]]' title='[[section.title]]' url='[[section.url]]'></dots-section>
+                            <dots-section id='[[titleToURL(section.title)]]' title='[[section.title]]' url='[[section.url]]' help-icon='[[helpIcon]]'></dots-section>
                         </template>
                     </div>
                 </div>
@@ -96,12 +123,17 @@
 
             is: "dots-page",
             
-            properties: {},
+            properties: {
+                helpIcon: {
+                    type: String,
+                    value: "help"
+                }
+            },
             
             ready: function() {
                 var self = this;
 
-                DOTSGlobal.XMLGetRequest("/json/sections.json",function(data){
+                DOTSGlobal.XMLGetRequest("/json/sections.json", function(data){
                     self.async(function() {
                         this.set("settings", JSON.parse(data));
                     });
@@ -109,7 +141,7 @@
             },
 
             titleToID: function(title) {
-                return "section-" + title.replace(' ','-').toLowerCase();
+                return "section-" + title.replace(/(^[a-zA-Z0-9 ])/, '').replace(' ','-').toLowerCase();
             }
 
         });
