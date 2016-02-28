@@ -5,13 +5,17 @@
 <link rel='import' href='../../bower_components/iron-icons/iron-icons.html'/>
 
 <link rel='import' href='../../bower_components/paper-drawer-panel/paper-drawer-panel.html'/>
+<link rel='import' href='../../bower_components/paper-fab/paper-fab.html'/>
 <link rel='import' href='../../bower_components/paper-header-panel/paper-header-panel.html'/>
 <link rel='import' href='../../bower_components/paper-icon-button/paper-icon-button.html'/>
 <link rel='import' href='../../bower_components/paper-item/paper-item.html'/>
 <link rel='import' href='../../bower_components/paper-material/paper-material.html'/>
 <link rel='import' href='../../bower_components/paper-menu/paper-menu.html'/>
-<link rel='import' href='../../bower_components/paper-toolbar/paper-toolbar.html'/>
+<link rel='import' href='../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html'/>
 <link rel='import' href='../../bower_components/paper-styles/paper-styles-classes.html'/>
+<link rel='import' href='../../bower_components/paper-styles/shadow.html'/>
+<link rel='import' href='../../bower_components/paper-toolbar/paper-toolbar.html'/>
+<link rel='import' href='../../bower_components/paper-tooltip/paper-tooltip.html'/>
 
 <link rel='import' href='../../elements/logo-dots/logo-dots.html'/>
 
@@ -46,6 +50,7 @@
             logo-dots.small {
                 height: 36px;
                 width: 256px;
+                cursor: pointer;
             }
 
             #drawer_toggle {
@@ -53,7 +58,16 @@
                 height: 48px;
             }
 
-            #page_header_large {
+            #page_header {
+                @apply(--shadow-none);
+                transition: box-shadow 200ms ease-in-out;
+            }
+
+            #page_header[shadow] {
+                @apply(--shadow-elevation-2dp);
+            }
+
+            #page_banner {
                 --paper-toolbar-height: 128px;
                 --paper-toolbar-sm-height: 112px;
             }
@@ -61,58 +75,80 @@
             #sections {
                 padding-top: 5px;
                 padding-bottom: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            #table_of_contents paper-item {
+                cursor: pointer;
             }
 
             #table_of_contents .help_icon{
-                position: absolute;
+                position: fixed;
                 bottom: 16px;
                 right: 16px;
             }
 
+            #return_button_container {
+                position: fixed;
+                right: 24px;
+                bottom: -60px;
+
+                transition: bottom 400ms ease-in;
+            }
+
+            #return_button_container[onscreen] {
+                bottom: 24px;
+            }
+
         </style>
 
-        <paper-drawer-panel force-narrow>
-            <paper-material elevation="1" drawer>            
-                <paper-header-panel>
+        <paper-drawer-panel id='page_sidebar' force-narrow>
+            <paper-material elevation="1" drawer>
+                <paper-header-panel mode='waterfall'>
                     <paper-toolbar>
-                        <logo-dots class='small'></logo-dots>
+                        <logo-dots class='small' on-tap='gotoTop'></logo-dots>
                     </paper-toolbar>
                     <div id='table_of_contents' class='fit'>
                         <paper-menu>
-                        <template is='dom-repeat' items='[[settings.sections]]'>
-                            <paper-item>[[item.title]]</paper-item>
-                        </template>
+                            <template is='dom-repeat' items='[[settings.sections]]'>
+                                <paper-item on-tap='tocGotoSection'>[[item.title]]</paper-item>
+                            </template>
                         </paper-menu>
-                        <paper-icon-button icon='[[helpIcon]]' class='help_icon'></paper-icon-button>
+                        <paper-icon-button icon='[[helpIcon]]' class='help_icon' on-tap='gotoDrawerSection'></paper-icon-button>
                     </div>
                 </paper-header-panel>
             </paper-material>
 
-            <paper-header-panel id='page_content' main class='flex' mode='waterfall'>
-                <paper-toolbar>
+            <paper-scroll-header-panel id='page_content' main class='flex' fixed>
+                <paper-toolbar id='page_header' shadow$='[[headerShadow]]'>
                     <paper-icon-button id='drawer_toggle' icon='menu' paper-drawer-toggle></paper-icon-button>
-                    <span class='paper-font-headline'>Section heading goes here (blank at start)</span>
-                    <paper-icon-button icon='[[helpIcon]]' class='help_icon'></paper-icon-button>
+                    <span class='paper-font-headline'>{{headerTitle}}</span>
+                    <paper-icon-button icon='[[helpIcon]]' class='help_icon' on-tap='gotoHeaderSection'></paper-icon-button>
                 </paper-toolbar>
                 <div>
-                    <paper-toolbar id='page_header_large' class='tall'>
-                        <div class='bottom fit layout vertical center'>
+                    <paper-toolbar id='page_banner' class='tall'>
+                        <div id='top' class='bottom fit layout vertical center'>
                             <logo-dots></logo-dots>
                             <h2 class='paper-font-display1'>
                                 <span class='accented'>Design</span>
                                 Of This Site
                             </h2>
                             <div class='spacer'></div>
-                            <paper-icon-button icon='[[helpIcon]]' class='help_icon'></paper-icon-button>
+                            <paper-icon-button icon='[[helpIcon]]' class='help_icon' on-tap='gotoBannerSection'></paper-icon-button>
                         </div>
                     </paper-toolbar>
                     <div id='sections'>
                         <template is='dom-repeat' items='[[settings.sections]]' as='section'>
-                            <dots-section id='[[titleToURL(section.title)]]' title='[[section.title]]' url='[[section.url]]' help-icon='[[helpIcon]]'></dots-section>
+                            <dots-section id='[[titleToID(section.title)]]' title='[[section.title]]' url='[[section.url]]' help-icon='[[helpIcon]]' help-event='[[sectionHelpIconEvent]]'></dots-section>
                         </template>
                     </div>
+                    <div id='return_button_container' onscreen$="[[returnButtonActive]]">
+                        <paper-fab id='return_button' icon='undo' on-tap='gotoPrevSection'></paper-fab>
+                        <paper-tooltip for='return_button' position='left' fitToVisibleBounds>Return to [[prevSection]]</paper-tooltip>
+                    </div>
                 </div>
-            <!-- </paper-header-panel> -->
+            </paper-scroll-header-panel>
         
         </paper-drawer-panel>
 
@@ -129,6 +165,10 @@
                     value: "help"
                 }
             },
+
+            listeners: {
+                'page_content.content-scroll': 'onScroll'
+            },
             
             ready: function() {
                 var self = this;
@@ -136,15 +176,123 @@
                 DOTSGlobal.XMLGetRequest("/json/sections.json", function(data){
                     self.async(function() {
                         this.set("settings", JSON.parse(data));
+                        this.async(function(){
+                            var parts = window.location.href.split('#');
+                            
+                            if (parts.length != 2 || !parts[1]) return;
+                            var section = this.$$("#" + parts[1]);
+
+                            if (section) this.gotoSection(section);
+                        });
                     });
+                });
+
+                this.sectionHelpIconEvent = "section_help_icon_tapped";
+                this.listen(this, this.sectionHelpIconEvent, 'gotoSectionsSection');
+            },
+
+            gotoTop: function() {
+                this.$.page_sidebar.closeDrawer();
+                this.gotoSection(this.$.page_banner, "");
+            },
+
+            gotoBannerSection: function() {
+                this.quickLookup("banner");
+            },
+
+            gotoHeaderSection: function() {
+                this.quickLookup("header");
+            },
+
+            gotoDrawerSection: function() {
+                this.quickLookup("sidebar");
+            },
+
+            gotoSectionsSection: function() {
+                this.quickLookup("sections");
+            },
+
+            quickLookup: function(name) {
+                var id = this.titleToID(this.settings.quick_lookups[name]);
+                this.gotoSection(this.$$("#"+id), id);
+            },
+
+            tocGotoSection: function(evt) {
+                var model = evt.model;
+                var id = this.titleToID(model.item.title);
+                this.$.page_sidebar.closeDrawer();
+                this.gotoSection(this.$$("#" + id), id);
+            },
+
+            gotoSection: function(element, newSection, ignore) {
+                this.async(function(){
+
+                    if (!ignore) {
+                        if (this.sectionHistory === undefined) this.sectionHistory = [];
+
+                        var currentSection = this.headerTitle ? this.headerTitle : "Top";
+
+                        if (this.prevSection != currentSection) {
+                            if (this.prevSection !== undefined) this.sectionHistory.push(this.prevSection);
+                            this.prevSection = currentSection;
+                            this.returnButtonActive = true;
+                        }
+                    }
+
+                    this.$.page_content.scroll(element.offsetTop, true);
+
+                    if (newSection !== undefined) this.updateSection(newSection);
+
+                });
+            },
+
+            gotoPrevSection: function(evt) {
+                if (this.sectionHistory === undefined) this.sectionHistory = [];
+
+                if (this.prevSection == "Top") this.gotoSection(this.$.page_banner, "", true);
+                else {
+                    var next = this.titleToID(this.prevSection);
+                    this.gotoSection(this.$$("#" + next), next, true);
+                }
+                
+                this.prevSection = this.sectionHistory.pop();
+                this.returnButtonActive = (this.prevSection !== undefined);
+            },
+
+            updateSection: function(newSection) {
+                this.async(function() {
+                    if (this.prevID == newSection) return;
+                    window.history.replaceState("DOTS", "Design Of This Site", "#" + newSection);
+                    this.prevID = newSection;
                 });
             },
 
             titleToID: function(title) {
-                return "section-" + title.replace(/(^[a-zA-Z0-9 ])/, '').replace(' ','-').toLowerCase();
+                return "section-" + title.replace(/([^a-zA-Z0-9 ])/, '').replace(' ','-').toLowerCase();
+            },
+
+            onScroll: function(evt) {
+                this.headerShadow = (evt.detail.target.scrollTop != 0);
+
+                this.debounce('update-header', function() {
+                    var sections = Polymer.dom(this.$.sections).querySelectorAll("dots-section");
+
+                    var headerTitle = "";
+                    var sectionID = "";
+
+                    for (var i = 0; i != sections.length; ++i) {
+                        if (sections[i].getBoundingClientRect().top > 100) break;
+                        headerTitle = sections[i].title;
+                        sectionID = this.titleToID(headerTitle);
+                    }
+
+                    this.headerTitle = headerTitle;
+                    this.updateSection(sectionID);
+                });
             }
 
         });
+
     </script>
 
 </dom-module>
