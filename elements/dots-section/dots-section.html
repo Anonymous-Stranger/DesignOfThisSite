@@ -14,13 +14,16 @@
 				padding: 1.5rem;
 				margin-top: 5px;
 				margin-bottom: 5px;
-				margin-left: 10px;
-				margin-right: 10px;
+				margin-left: auto;
+				margin-right: auto;
+
+				max-width: 960px;
 
 				background-color: var(--primary-background-color);
 			}
 
 			.help_icon {
+				margin-bottom: 0;
 				margin-left: 100%;
 				left: -32px;
 			}
@@ -30,7 +33,7 @@
 		<paper-material elevation='1' class='container'>
 			<h3>{{title}}</h3>
 			<div style='min-height: 20rem'>{{content}}</div>
-			<paper-icon-button icon='[[helpIcon]]' class='help_icon'></paper-icon-button>
+			<paper-icon-button icon='[[helpIcon]]' class='help_icon' on-tap='fireHelpEvent'></paper-icon-button>
 		</paper-material>
 
 	</template>
@@ -38,18 +41,25 @@
 	<script>
 		Polymer({
 			is: "dots-section",
+			
 			properties: {
 				title: String,
-				url: String,
-				helpIcon: String
+				helpIcon: String,
+				helpEvent: String
 			},
+			
 			ready: function() {
 				var self = this;
 				
 				DOTSGlobal.XMLGetRequest(this.url, function(data){
 					self.set("content", data);
 				});
+			},
+
+			fireHelpEvent: function() {
+				this.fire(this.helpEvent);
 			}
+
 		});
 	</script>
 
