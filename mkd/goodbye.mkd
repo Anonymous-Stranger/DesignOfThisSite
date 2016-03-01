@@ -1,0 +1,10 @@
+So what do we have here? What makes a good site? 
+
+In the end we're not sure. Different traits make different sites good, and often, a trait that makes one site well designed makes another one badly so. However, we can conclude one thing: it is good to focus on serving the end user, making it easier for them to get what they want done. Ironically, we have failed to deliver what you desire: a simple way to make beautiful interfaces. There is no simple way. There is no quick how-to guide, or defining example which we can hand to you and say: this is how you make a beautiful website. 
+
+All we can say is this: **Good luck. Hope you saw ideas you liked.**
+
+Cheers,  
+Akash and Miles
+
+OUR CODE: [GitHub](https://github.com/Anonymous-Stranger/MetaDesign/)

@@ -2,7 +2,7 @@
     "quick_lookups": {
         "banner": ["banner", "material_design", "colors"],
         "header": ["header"],
-        "sections": ["sections", "story_mode", "material_design", "writing_style", "header", "urls"],
+        "sections": ["sections", "story_mode", "material_design", "writing_style", "header"],
         "sidebar": ["sidebar", "reference_mode", "material_design", "sections"]
     },
     "quick_lookups_titles": {
@@ -71,10 +71,6 @@
         {
             "title": "Return Button",
             "url": "mkd/return_button.mkd"
-        },
-        {
-            "title": "URLs",
-            "url": "mkd/urls.mkd"
         },
         {
             "title": "Goodbye",
