@@ -2,9 +2,9 @@
 <link rel='import' href='../../bower_components/polymer/polymer.html'/>
 
 <link rel='import' href='../../bower_components/marked-element/marked-element.html'/>
-
 <link rel='import' href='../../bower_components/paper-material/paper-material.html'/>
-<link rel='import' href='../../bower_components/paper-icon-button/paper-icon-button.html'/>
+
+<link rel='import' href='../../elements/quick-lookup/quick-lookup.html'/>
 
 <dom-module id='dots-section'>
 	
@@ -14,6 +14,7 @@
 
 			.container {
 				padding: 1.5rem;
+
 				margin-top: 5px;
 				margin-bottom: 5px;
 				margin-left: auto;
@@ -30,10 +31,12 @@
 				overflow: hidden;
 			}
 
-			.help_icon {
-				margin-bottom: 0;
-				margin-left: 100%;
-				left: -32px;
+			quick-lookup {
+				float: right;
+			}
+
+			.float_blocker {
+				clear: both;
 			}
 
 		</style>
@@ -41,7 +44,10 @@
 		<paper-material elevation='1' class='container'>
 			<h3>{{title}}</h3>
 			<marked-element markdown='[[content]]'></marked-element>
-			<paper-icon-button icon='[[helpIcon]]' class='help_icon' on-tap='fireHelpEvent'></paper-icon-button>
+			<template is='dom-repeat' items='[[quickLookups]]' as='lookup'>
+                <quick-lookup title='[[lookup]]' lookup-event='[[lookupEvent]]'></quick-lookup>
+            </template>
+            <div class='float_blocker'></div>
 		</paper-material>
 
 	</template>
@@ -52,8 +58,12 @@
 			
 			properties: {
 				title: String,
-				helpIcon: String,
-				helpEvent: String
+				quickLookups: Array,
+				lookupEvent: String,
+				loaded: {
+					type: Boolean,
+					notify: true
+				}
 			},
 			
 			ready: function() {
@@ -61,11 +71,8 @@
 				
 				DOTSGlobal.XMLGetRequest(this.url, function(data){
 					self.set("content", data);
+					self.set("loaded", true);
 				});
-			},
-
-			fireHelpEvent: function() {
-				this.fire(this.helpEvent);
 			}
 
 		});
