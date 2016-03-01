@@ -1,0 +1,6 @@
+
+The return button is for those moments when the user follows a link but wants to remember where they came from afterward. Any time the user follows a link, the return button will appear so they can go back. This includes quick lookups and table of contents links.
+
+The return button is highlighted for the user with the accent color so it's highly visible and the user can find it. It appears and disappears in an intuitive way with motion to make it more visible.
+
+As a general rule for apps and websites, there should always be an "undo" button for any actions the user might want to undo. The undo function should be very easy to use.
