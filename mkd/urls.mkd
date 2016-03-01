@@ -1,0 +1,5 @@
+
+This website keeps track of what section the user is viewing so that...
+1. The user can copy the address out of their browser and it'll take them to the same section of the site.
+2. The return button can link the user to the same section of the site they were on most recently.
+3. The header can tell them the name of the section they're on.
