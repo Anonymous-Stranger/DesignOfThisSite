@@ -21,6 +21,22 @@
             "url": "mkd/mode_reference.mkd"
         },
         {
+            "title": "Material Design",
+            "url": "mkd/material.mkd"
+        },
+        {
+            "title": "Color Scheme",
+            "url": "mkd/colors.mkd"
+        },
+        {
+            "title": "Writing Style",
+            "url": "mkd/communication.mkd"
+        },
+        {
+            "title": "Typography",
+            "url": "mkd/typography.mkd"
+        },
+        {
             "title": "Banner",
             "url": "mkd/banner.html"
         },
@@ -45,20 +61,8 @@
             "url": "mkd/return_button.mkd"
         },
         {
-            "title": "Writing Style",
-            "url": "mkd/communication.mkd"
-        },
-        {
-            "title": "Material Design",
-            "url": "mkd/material.mkd"
-        },
-        {
-            "title": "Color Scheme",
-            "url": "mkd/colors.mkd"
-        },
-        {
-            "title": "Typography",
-            "url": "mkd/typography.mkd"
+            "title": "URLs",
+            "url": "mkd/urls.mkd"
         },
         {
             "title": "Goodbye",

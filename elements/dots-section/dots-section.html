@@ -1,6 +1,8 @@
 
 <link rel='import' href='../../bower_components/polymer/polymer.html'/>
 
+<link rel='import' href='../../bower_components/marked-element/marked-element.html'/>
+
 <link rel='import' href='../../bower_components/paper-material/paper-material.html'/>
 <link rel='import' href='../../bower_components/paper-icon-button/paper-icon-button.html'/>
 
@@ -9,7 +11,7 @@
 	<template>
 		
 		<style>
-			
+
 			.container {
 				padding: 1.5rem;
 				margin-top: 5px;
@@ -22,6 +24,12 @@
 				background-color: var(--primary-background-color);
 			}
 
+			marked-element {
+				min-height: 20rem;
+				max-width: 100%;
+				overflow: hidden;
+			}
+
 			.help_icon {
 				margin-bottom: 0;
 				margin-left: 100%;
@@ -32,7 +40,7 @@
 
 		<paper-material elevation='1' class='container'>
 			<h3>{{title}}</h3>
-			<div style='min-height: 20rem'>{{content}}</div>
+			<marked-element markdown='[[content]]'></marked-element>
 			<paper-icon-button icon='[[helpIcon]]' class='help_icon' on-tap='fireHelpEvent'></paper-icon-button>
 		</paper-material>
 
