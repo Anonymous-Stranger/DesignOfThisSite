@@ -19,6 +19,8 @@
 
 <link rel='import' href='../../elements/dots-section/dots-section.html'/>
 <link rel='import' href='../../elements/logo-dots/logo-dots.html'/>
+<link rel='import' href='../../elements/logo-akash/logo-akash.html'/>
+<link rel='import' href='../../elements/logo-miles/logo-miles.html'/>
 <link rel='import' href='../../elements/quick-lookup/quick-lookup.html'/>
 
 <dom-module id='dots-page'>
@@ -105,6 +107,19 @@
                 bottom: 24px;
             }
 
+            #footer {
+                width: 100%;
+                height: 10rem;
+
+                @apply(--layout-horizontal);
+                @apply(--layout-center-center);
+            }
+
+            logo-akash,
+            logo-miles {
+                width: 64px;
+            }
+
             @media screen and (min-width: 64em) {
                 #return_button_container {
                     right: 36px;
@@ -172,6 +187,11 @@
                     <div id='return_button_container' onscreen$="[[returnButtonActive]]">
                         <paper-fab id='return_button' icon='undo' on-tap='gotoPrevSection'></paper-fab>
                         <paper-tooltip for='return_button' position='left' fitToVisibleBounds>Return to [[prevSection]]</paper-tooltip>
+                    </div>
+
+                    <div id='footer'>
+                        <logo-akash></logo-akash>
+                        <logo-miles></logo-miles>
                     </div>
 
                 </div>
@@ -305,7 +325,6 @@
                     window.history.replaceState("DOTS", "Design Of This Site", "#" + newSection);
                     this.prevID = newSection;
                     this.$.sections_menu.select(newSection);
-                    console.log(this.$.sections_menu.items);
                 });
             },
 

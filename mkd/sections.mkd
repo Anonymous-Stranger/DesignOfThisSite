@@ -1,2 +1,7 @@
 
 This website is divided into different sections for the different parts of our design. The user can look at each section on its own to understand one part of the design. The sections are displayed on "cards" that float over the background. Their movement gives the user an intuitive sense of location. The cards are white to provide a clean background for the text they display. Some cards have links to other websites, and we mark those links with an "EXTERNAL LINK" label.
+
+This website keeps track of what section the user is viewing so that:
+1. The user can copy the address out of their browser and it'll take them to the same section of the site.
+2. The return button can link the user to the same section of the site they were on most recently.
+3. The header can tell them the name of the section they're on.
