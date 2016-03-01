@@ -1,6 +1,7 @@
+Google's Material Design is a set of guidelines for building apps and websites.
 
-Google's Material Design guidelines are a well-known and comprehensive design methodology for mobile application user interfaces. The goal of the methodology is to make apps that are easy to use and understand.
+In Material Design, apps and webpages are made of flat pieces of "paper" layered ontop of one another. It sets rules about how these should move, how text should be placed on them, how layouts should work and just about every other aspect of design.
 
-Material Design enforces the use of flat, simple pieces of "paper", layered parallel to one another. It includes rules about how these should move, how text should be placed on them, how layouts should work and just about every other aspect of design. An in-depth description can be found [here](https://www.google.com/design/spec/material-design/introduction.html).
+The goal of Material Design is to make apps and websites straightforward to use.
 
-
+EXTERNAL LINK: [Material Design](https://www.google.com/design/spec/material-design/introduction.html)
