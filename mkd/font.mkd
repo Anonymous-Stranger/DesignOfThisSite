@@ -1,0 +1,6 @@
+
+A good choice of font makes websites readable and visually pleasing. Fonts often look different on different displays and at different sizes, so making a font that works well for all devices is very hard.
+
+This website uses the Roboto font, designed by Google to work well on all displays and sizes. It's a sans-serif font (no curly bits at the ends), which keeps it readable on small monitors, and it scales to larger and smaller sizes very well.
+
+EXTERNAL LINK: [Roboto](https://www.google.com/fonts/specimen/Roboto)

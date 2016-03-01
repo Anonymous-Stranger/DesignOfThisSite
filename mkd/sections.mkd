@@ -1,0 +1,2 @@
+
+This website is divided into different sections for the different parts of our design. The user can look at each section on its own to understand one part of the design. The sections are displayed on "cards" that float over the background. Their movement gives the user an intuitive sense of location. The cards are white to provide a clean background for the text they display. Some cards have links to other websites, and we mark those links with an "EXTERNAL LINK" label.

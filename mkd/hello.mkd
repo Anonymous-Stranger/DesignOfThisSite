@@ -1,4 +1,4 @@
-This website is a demo of (hopefully) good design. It's purpose is to explain the decisions involved in its own creation, such as, why does this site have a sidebar and why spend so much of the space on a banner? For someone looking for an example of design thinking, this site will provide both that example, and an explanation of why certain choices were made.
+This website is a demo of (hopefully) good design. It's purpose is to explain the decisions involved in its own creation, such as, why does this site have a table of contents and why spend so much of the space on a banner? For someone looking for an example of design thinking, this site will provide both that example, and an explanation of why certain choices were made.
 
 Various parts of the website are built with two types of users in mind:
 1. (probably new) users wanting to follow the story of how this site was designed
@@ -7,10 +7,10 @@ Various parts of the website are built with two types of users in mind:
 For the first kind of user, we offer a "story mode", where they can read the sections in order and understand the site as a whole.
 If this fits you, all you need to do is scroll down, and you can read section by section.
 
-For the second kind of user, we offer the more interactive "reference mode", where they can use the sidebar and quicklinks to navigate where they want.
-If this mode fits you, you can access the sidebar by pressing the three horizontal bars icon on the top left, and you can use the quick links by pressing on any of the many question marks to find out about the feature the question mark is attached to.
+For the second kind of user, we offer the more interactive "reference mode", where they can use the table of contents and quicklinks to navigate where they want.
+If this mode fits you, you can access the table of contents by pressing the three horizontal bars icon on the top left, and you can use the quick links by pressing on any of the many question marks to find out about the feature the question mark is attached to.
 
-If you choose to use either the sidebar or the quicklinks, a return button will rise to the bottom right of the screen. Pressing this button will return you to your previous location, so you can continue reading where you left off.
+If you choose to use either the table of contents or the quicklinks, a return button will rise to the bottom right of the screen. Pressing this button will return you to your previous location, so you can continue reading where you left off.
 
 Enjoy!
 
