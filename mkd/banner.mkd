@@ -1,0 +1,4 @@
+
+The banner of a website attracts the user's attention and tells them where they are. The website's colors should all be present in the banner to help form the brand.
+
+This site's banner is simple but visually pleasing. It uses the exact same colors as our site's palette, to build the brand. We display it strongly when the user arrives but it moves out of the way once they start scrolling, to let them use the site. The movement of the banner is simple and intuitive, and doesn't get in the way or confuse the user. These are all rules set forth by Material Design too.

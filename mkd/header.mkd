@@ -1,0 +1,6 @@
+
+The header holds important options for the user. It should be available wherever the user goes to make those options available.
+
+Our header shows the user where they are, and helps them access the table of contents. It strengthens the brand by displaying the site's primary color.
+
+As suggested by Material Design, our header appears to raise itself above other elements when it goes over them, to make its movement more intuitive to the user.

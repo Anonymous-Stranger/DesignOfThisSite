@@ -1,0 +1,4 @@
+
+The table of contents should help users go wherever they want very quickly. It should always be available and should be easy to use.
+
+The icon for our table of contents is the standard Material menu icon, which tells the user what the button is for. This icon is in the header so the user can always see it. The table of contents darkens the rest of the page when it enters, to focus the user on navigation. Its movement is intuitive, both entering and exiting. The user can click on the page to return to browsing. This makes the table of contents as useful as possible without getting in the user's way. A table of contents that's always present might get in the way on smaller screens, which is why we make the user press a button to access it.

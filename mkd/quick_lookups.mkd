@@ -1,0 +1,4 @@
+
+The quick lookups are the links with question marks at the corners of items on this website. These are part of our reference mode. The goal is to let the user get information immediately about whatever item they're looking at. Clicking on one will take the user to the section about that object, and bring up the return button so they can go back. This way, users can go off and look at something else for a moment if they're curious, then go back to what they were doing.
+
+Everything on the website has a quick lookup, so the user can go to the description of something even if they don't know its name, by clicking on its quick lookup.
