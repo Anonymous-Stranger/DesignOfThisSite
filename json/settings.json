@@ -1,0 +1,80 @@
+{
+    "quick_lookups": {
+        "banner": ["banner", "material_design", "colors"],
+        "header": ["header"],
+        "sections": ["sections", "story_mode", "material_design", "writing_style", "header"],
+        "sidebar": ["sidebar", "reference_mode", "material_design", "sections"]
+    },
+    "quick_lookups_titles": {
+        "banner": "Banner",
+        "colors": "Color Scheme",
+        "header": "Header",
+        "material_design": "Material Design",
+        "quick_lookups": "Quick Lookups",
+        "return_button": "Return Button",
+        "reference_mode": "Reference Mode",
+        "sections": "Sections",
+        "sidebar": "Sidebar",
+        "story_mode": "Story Mode",
+        "urls": "URLs",
+        "writing_style": "Writing Style"
+    },
+    "sections": [
+        {
+            "title": "Hello",
+            "url": "mkd/hello.mkd"
+        },
+        {
+            "title": "Story Mode",
+            "url": "mkd/mode_story.mkd"
+        },
+        {
+            "title": "Reference Mode",
+            "url": "mkd/mode_reference.mkd"
+        },
+        {
+            "title": "Material Design",
+            "url": "mkd/material.mkd"
+        },
+        {
+            "title": "Color Scheme",
+            "url": "mkd/colors.mkd"
+        },
+        {
+            "title": "Writing Style",
+            "url": "mkd/communication.mkd"
+        },
+        {
+            "title": "Font",
+            "url": "mkd/font.mkd"
+        },
+        {
+            "title": "Banner",
+            "url": "mkd/banner.mkd"
+        },
+        {
+            "title": "Header",
+            "url": "mkd/header.mkd"
+        },
+        {
+            "title": "Sidebar",
+            "url": "mkd/sidebar.mkd"
+        },
+        {
+            "title": "Sections",
+            "url": "mkd/sections.mkd"
+        },
+        {
+            "title": "Quick Lookups",
+            "url": "mkd/quick_lookups.mkd"
+        },
+        {
+            "title": "Return Button",
+            "url": "mkd/return_button.mkd"
+        },
+        {
+            "title": "Goodbye",
+            "url": "mkd/goodbye.mkd"
+        }
+    ]
+}

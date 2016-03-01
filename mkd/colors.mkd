@@ -1,0 +1,8 @@
+
+Color is important for websites because it helps the user form an emotional and instinctive identity for the website.
+
+Material Design suggests choosing a color scheme based on bright, bold colors and provides different palettes for different roles in the color scheme. The main roles are Primary Color and Accent Color.
+
+We chose to use brown as our primary color, with light blue for accent, to evoke the image of earth, sky and clouds, and immerse the user in the world of design. Light blue contrasts enough with brown and white to tell them all apart, and is strong enough to emphasize the return button and other elements using it. Brown is a color seldom used in web design but that fits in very well with light blue. So our colors fit together very nicely at the same time as being unique so that users will remember our site.
+
+The choice of color for each item on the page depends on how much emphasis we want on that item and its neighbors. For highly emphasized backgrounds we used our primary color, brown. For the most important button and highlights in the banner we used our accent color, light blue. We used black and white for everything else because too much brown and blue gets overwhelming.

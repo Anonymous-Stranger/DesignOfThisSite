@@ -1,0 +1,359 @@
+
+<link rel='import' href='../../bower_components/polymer/polymer.html'/>
+
+<link rel='import' href='../../bower_components/iron-flex-layout/classes/iron-flex-layout.html'/>
+<link rel='import' href='../../bower_components/iron-icons/iron-icons.html'/>
+
+<link rel='import' href='../../bower_components/paper-drawer-panel/paper-drawer-panel.html'/>
+<link rel='import' href='../../bower_components/paper-fab/paper-fab.html'/>
+<link rel='import' href='../../bower_components/paper-header-panel/paper-header-panel.html'/>
+<link rel='import' href='../../bower_components/paper-icon-button/paper-icon-button.html'/>
+<link rel='import' href='../../bower_components/paper-item/paper-item.html'/>
+<link rel='import' href='../../bower_components/paper-material/paper-material.html'/>
+<link rel='import' href='../../bower_components/paper-menu/paper-menu.html'/>
+<link rel='import' href='../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html'/>
+<link rel='import' href='../../bower_components/paper-styles/paper-styles-classes.html'/>
+<link rel='import' href='../../bower_components/paper-styles/shadow.html'/>
+<link rel='import' href='../../bower_components/paper-toolbar/paper-toolbar.html'/>
+<link rel='import' href='../../bower_components/paper-tooltip/paper-tooltip.html'/>
+
+<link rel='import' href='../../elements/dots-section/dots-section.html'/>
+<link rel='import' href='../../elements/logo-dots/logo-dots.html'/>
+<link rel='import' href='../../elements/logo-akash/logo-akash.html'/>
+<link rel='import' href='../../elements/logo-miles/logo-miles.html'/>
+<link rel='import' href='../../elements/quick-lookup/quick-lookup.html'/>
+
+<dom-module id='dots-page'>
+
+    <template>
+        
+        <style>
+        
+            .accented {
+                color: var(--accent-color);
+            }
+
+            paper-header-panel {
+                background-color: var(--primary-background-color);
+            }
+
+            #page_content {
+                background-color: var(--secondary-background-color);
+            }
+
+            paper-toolbar * {
+                transition: all .18s ease-in;
+            }
+
+            quick-lookup {
+                float: right;
+            }
+
+            .quick_lookup_container,
+            quick-lookup:only-of-type,
+            .help_icon {
+                margin-left: auto;
+            }
+
+            logo-dots.small {
+                height: 36px;
+                width: 256px;
+                cursor: pointer;
+            }
+
+            #drawer_toggle {
+                width: 48px;
+                height: 48px;
+            }
+
+            #page_header {
+                @apply(--shadow-none);
+                transition: box-shadow 200ms ease-in-out;
+            }
+
+            #page_header[shadow] {
+                @apply(--shadow-elevation-2dp);
+            }
+
+            #page_banner {
+                --paper-toolbar-height: 128px;
+                --paper-toolbar-sm-height: 112px;
+            }
+
+            #sections {
+                padding-top: 5px;
+                padding-bottom: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            #table_of_contents paper-item {
+                cursor: pointer;
+            }
+
+            #table_of_contents quick-lookup{
+                float: none;
+            }
+
+            #return_button_container {
+                position: fixed;
+                right: 24px;
+                bottom: -60px;
+
+                transition: bottom 400ms ease-in;
+            }
+
+            #return_button_container[onscreen] {
+                bottom: 24px;
+            }
+
+            #footer {
+                width: 100%;
+                height: 10rem;
+
+                @apply(--layout-horizontal);
+                @apply(--layout-center-center);
+            }
+
+            logo-akash,
+            logo-miles {
+                width: 64px;
+            }
+
+            @media screen and (min-width: 64em) {
+                #return_button_container {
+                    right: 36px;
+                }
+            }
+
+        </style>
+
+        <paper-drawer-panel id='page_sidebar' force-narrow>
+            
+            <paper-material elevation="1" drawer>
+                <paper-header-panel mode='waterfall'>
+                    <paper-toolbar>
+                        <logo-dots class='small' on-tap='gotoTop'></logo-dots>
+                    </paper-toolbar>
+                    <div id='table_of_contents' class='fit'>
+                        
+                        <paper-menu id='sections_menu' attr-for-selected='section-id'>
+                            <template is='dom-repeat' items='[[settings.sections]]'>
+                                <paper-item on-tap='tocGotoSection' section-id$='[[titleToID(item.title)]]'>[[item.title]]</paper-item>
+                            </template>
+                        </paper-menu>
+
+                        <template is='dom-repeat' items='[[settings.quick_lookups.sidebar]]' as='lookup'>
+                            <quick-lookup title='[[lookup]]' lookup-event='[[quickLookupEvent]]'></quick-lookup>
+                            <br/>
+                        </template>
+                    </div>
+                </paper-header-panel>
+            </paper-material>
+
+            <paper-scroll-header-panel id='page_content' main class='flex' fixed>
+                
+                <paper-toolbar id='page_header' shadow$='[[headerShadow]]'>
+                    <paper-icon-button id='drawer_toggle' icon='menu' paper-drawer-toggle></paper-icon-button>
+                    <span class='paper-font-headline'>[[headerTitle]]</span>
+                    <template is='dom-repeat' items='[[settings.quick_lookups.header]]' as='lookup'>
+                        <quick-lookup title='[[lookup]]' lookup-event='[[quickLookupEvent]]'></quick-lookup>
+                    </template>
+                </paper-toolbar>
+                
+                <div>
+                    
+                    <paper-toolbar id='page_banner' class='tall'>
+                        <div id='top' class='bottom fit layout vertical center'>
+                            <logo-dots></logo-dots>
+                            <h2 class='paper-font-display1'>
+                                <span class='accented'>Design</span>
+                                Of This Site
+                            </h2>
+                            <div class='quick_lookup_container'>
+                                <template is='dom-repeat' items='[[settings.quick_lookups.banner]]' as='lookup'>
+                                    <quick-lookup title='[[lookup]]' lookup-event='[[quickLookupEvent]]'></quick-lookup>
+                                </template>
+                            </div>
+                        </div>
+                    </paper-toolbar>
+                    
+                    <div id='sections'>
+                        <template is='dom-repeat' items='[[settings.sections]]' as='section'>
+                            <dots-section id='[[titleToID(section.title)]]' title='[[section.title]]' url='[[section.url]]' quick-lookups='[[settings.quick_lookups.sections]]' lookup-event='[[quickLookupEvent]]'></dots-section>
+                        </template>
+                    </div>
+                    
+                    <div id='return_button_container' onscreen$="[[returnButtonActive]]">
+                        <paper-fab id='return_button' icon='undo' on-tap='gotoPrevSection'></paper-fab>
+                        <paper-tooltip for='return_button' position='left' fitToVisibleBounds>Return to [[prevSection]]</paper-tooltip>
+                    </div>
+
+                    <div id='footer'>
+                        <logo-akash></logo-akash>
+                        <logo-miles></logo-miles>
+                    </div>
+
+                </div>
+
+            </paper-scroll-header-panel>
+        
+        </paper-drawer-panel>
+
+    </template>
+
+    <script>
+        Polymer({
+
+            is: "dots-page",
+            
+            properties: {
+                helpIcon: {
+                    type: String,
+                    value: "help"
+                }
+            },
+
+            listeners: {
+                'page_content.content-scroll': 'onScroll'
+            },
+
+            ready: function() {
+                var self = this;
+
+                DOTSGlobal.XMLGetRequest("/json/settings.json", function(data){
+                    var settings = JSON.parse(data);
+
+                    // for each section in quick_lookups, switch lookups from section short names to titles.
+                    for (var section in settings.quick_lookups) {
+                        var lookups = settings.quick_lookups[section];
+                        for (var i = 0; i != lookups.length; ++i) {
+                            lookups[i] = settings.quick_lookups_titles[lookups[i]];
+                        }
+                    }
+
+                    self.async(function() {
+                        this.set("settings", settings);
+                        
+                        var parts = window.location.href.split('#');
+                            
+                        if (parts.length != 2 || !parts[1]) return;
+
+                        var waitTime = 100;
+
+                        var gotoSectionInURL = function(){                            
+                            var section = this.$$("#" + parts[1]);
+                            if (!section) return;
+
+                            if (section.loaded) {
+                                this.gotoSection(section);
+                            } else {
+                                waitTime *= 2;
+                                // console.log("Not yet loaded, waiting "+waitTime+" ms...");
+                                this.async(gotoSectionInURL, waitTime);
+                            }
+                        }
+
+                        this.async(gotoSectionInURL);
+                    });
+                });
+
+                this.quickLookupEvent = "quick_lookup_tapped";
+                this.listen(this, this.quickLookupEvent, 'quickLookupTapped');
+            },
+
+            gotoTop: function() {
+                this.$.page_sidebar.closeDrawer();
+                this.gotoSection(this.$.page_banner, "");
+            },
+
+            quickLookupTapped: function(evt) {
+                this.quickLookup(evt.detail);
+            },
+
+            quickLookup: function(title) {
+                this.$.page_sidebar.closeDrawer();
+                var id = this.titleToID(title);
+                this.gotoSection(this.$$("#"+id), id);
+            },
+
+            tocGotoSection: function(evt) {
+                var model = evt.model;
+                var id = this.titleToID(model.item.title);
+                this.$.page_sidebar.closeDrawer();
+                this.gotoSection(this.$$("#" + id), id);
+            },
+
+            gotoSection: function(element, newSection, ignore) {
+                this.async(function(){
+
+                    if (!ignore) {
+                        if (this.sectionHistory === undefined) this.sectionHistory = [];
+
+                        var currentSection = this.headerTitle ? this.headerTitle : "Top";
+
+                        if (this.prevSection != currentSection) {
+                            if (this.prevSection !== undefined) this.sectionHistory.push(this.prevSection);
+                            this.prevSection = currentSection;
+                            this.returnButtonActive = true;
+                        }
+                    }
+
+                    this.$.page_content.scroll(element.offsetTop, true);
+
+                    if (newSection !== undefined) this.updateSection(newSection);
+
+                });
+            },
+
+            gotoPrevSection: function(evt) {
+                if (this.sectionHistory === undefined) this.sectionHistory = [];
+
+                if (this.prevSection == "Top") this.gotoSection(this.$.page_banner, "", true);
+                else {
+                    var next = this.titleToID(this.prevSection);
+                    this.gotoSection(this.$$("#" + next), next, true);
+                }
+                
+                this.prevSection = this.sectionHistory.pop();
+                this.returnButtonActive = (this.prevSection !== undefined);
+            },
+
+            updateSection: function(newSection) {
+                this.async(function() {
+                    if (this.prevID == newSection) return;
+                    window.history.replaceState("DOTS", "Design Of This Site", "#" + newSection);
+                    this.prevID = newSection;
+                    this.$.sections_menu.select(newSection);
+                });
+            },
+
+            titleToID: function(title) {
+                return "section-" + title.replace(/([^a-zA-Z0-9 ])/, '').replace(' ','-').toLowerCase();
+            },
+
+            onScroll: function(evt) {
+                this.headerShadow = (evt.detail.target.scrollTop != 0);
+
+                this.debounce('update-header', function() {
+                    var sections = Polymer.dom(this.$.sections).querySelectorAll("dots-section");
+
+                    var headerTitle = "";
+                    var sectionID = "";
+
+                    for (var i = 0; i != sections.length; ++i) {
+                        if (sections[i].getBoundingClientRect().top > 100) break;
+                        headerTitle = sections[i].title;
+                        sectionID = this.titleToID(headerTitle);
+                    }
+
+                    this.headerTitle = headerTitle;
+                    this.updateSection(sectionID);
+                });
+            }
+
+        });
+
+    </script>
+
+</dom-module>

@@ -1,0 +1,81 @@
+
+<link rel='import' href='../../bower_components/polymer/polymer.html'/>
+
+<link rel='import' href='../../bower_components/marked-element/marked-element.html'/>
+<link rel='import' href='../../bower_components/paper-material/paper-material.html'/>
+
+<link rel='import' href='../../elements/quick-lookup/quick-lookup.html'/>
+
+<dom-module id='dots-section'>
+	
+	<template>
+		
+		<style>
+
+			.container {
+				padding: 1.5rem;
+
+				margin-top: 5px;
+				margin-bottom: 5px;
+				margin-left: auto;
+				margin-right: auto;
+
+				max-width: 960px;
+
+				background-color: var(--primary-background-color);
+			}
+
+			marked-element {
+				min-height: 20rem;
+				max-width: 100%;
+				overflow: hidden;
+			}
+
+			quick-lookup {
+				float: right;
+			}
+
+			.float_blocker {
+				clear: both;
+			}
+
+		</style>
+
+		<paper-material elevation='1' class='container'>
+			<h3>{{title}}</h3>
+			<marked-element markdown='[[content]]'></marked-element>
+			<template is='dom-repeat' items='[[quickLookups]]' as='lookup'>
+                <quick-lookup title='[[lookup]]' lookup-event='[[lookupEvent]]'></quick-lookup>
+            </template>
+            <div class='float_blocker'></div>
+		</paper-material>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: "dots-section",
+			
+			properties: {
+				title: String,
+				quickLookups: Array,
+				lookupEvent: String,
+				loaded: {
+					type: Boolean,
+					notify: true
+				}
+			},
+			
+			ready: function() {
+				var self = this;
+				
+				DOTSGlobal.XMLGetRequest(this.url, function(data){
+					self.set("content", data);
+					self.set("loaded", true);
+				});
+			}
+
+		});
+	</script>
+
+</dom-module>
