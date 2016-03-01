@@ -1,0 +1,4 @@
+
+We chose to use brown as our primary color, with light blue for accent. This gives the appearance of earth, sky and clouds since we have white and gray for our remaining background colors.
+
+Light blue contrasts enough with brown and white to tell them all apart, and is strong enough to emphasize the return button and other elements using it. Brown is a color seldom used in web design but that fits in very well with light blue. So our colors fit together very nicely at the same time as being unique so that users will remember our site.
