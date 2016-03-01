@@ -1,0 +1,2 @@
+
+We designed reference mode for users who are returning to the site, or for some other reason just want to look at one part of the design. Users can find out about the item they're looking at using the question marks placed around the site, and can browse design topics by category using the menu which is always at the left end of the header.

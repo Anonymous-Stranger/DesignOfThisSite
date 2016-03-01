@@ -1,0 +1,4 @@
+
+Since we want to help users understand the design process, we went over it from beginning to end. We start at the most general concepts, which we came up with first, and move to more specific details toward the end. This lets the user follow the design process as it happens for the designers, so they can design their own sites by a similar process if they like it.
+
+So that new users can start reading right away, story mode is the most visible function of the site.
