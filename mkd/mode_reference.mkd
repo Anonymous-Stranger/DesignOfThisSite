@@ -1,0 +1,4 @@
+
+We designed reference mode for users who are returning to the site, or for some other reason just want to look at one part of the design. Because reference mode needs to cover every aspect of the design, users need to be able to go to any part of the design easily.
+
+Users can find out about an item they're looking at using the question mark icon. They can also browse design topics by category using the menu which is always at the left end of the header. If a user switched to reference mode from story mode, the back arrow can return them to wherever they were in story mode, so they don't lose track.
