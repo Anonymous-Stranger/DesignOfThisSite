@@ -17,9 +17,9 @@
 <link rel='import' href='../../bower_components/paper-toolbar/paper-toolbar.html'/>
 <link rel='import' href='../../bower_components/paper-tooltip/paper-tooltip.html'/>
 
-<link rel='import' href='../../elements/logo-dots/logo-dots.html'/>
-
 <link rel='import' href='../../elements/dots-section/dots-section.html'/>
+<link rel='import' href='../../elements/logo-dots/logo-dots.html'/>
+<link rel='import' href='../../elements/quick-lookup/quick-lookup.html'/>
 
 <dom-module id='dots-page'>
 
@@ -43,6 +43,12 @@
                 transition: all .18s ease-in;
             }
 
+            quick-lookup {
+                float: right;
+            }
+
+            .quick_lookup_container,
+            quick-lookup:only-of-type,
             .help_icon {
                 margin-left: auto;
             }
@@ -83,10 +89,8 @@
                 cursor: pointer;
             }
 
-            #table_of_contents .help_icon{
-                position: fixed;
-                bottom: 16px;
-                right: 16px;
+            #table_of_contents quick-lookup{
+                float: none;
             }
 
             #return_button_container {
@@ -99,6 +103,12 @@
 
             #return_button_container[onscreen] {
                 bottom: 24px;
+            }
+
+            @media screen and (min-width: 64em) {
+                #return_button_container {
+                    right: 36px;
+                }
             }
 
         </style>
@@ -115,7 +125,10 @@
                                 <paper-item on-tap='tocGotoSection'>[[item.title]]</paper-item>
                             </template>
                         </paper-menu>
-                        <paper-icon-button icon='[[helpIcon]]' class='help_icon' on-tap='gotoDrawerSection'></paper-icon-button>
+                        <template is='dom-repeat' items='[[settings.quick_lookups.sidebar]]' as='lookup'>
+                            <quick-lookup title='[[lookup]]' lookup-event='[[quickLookupEvent]]'></quick-lookup>
+                            <br/>
+                        </template>
                     </div>
                 </paper-header-panel>
             </paper-material>
@@ -123,8 +136,10 @@
             <paper-scroll-header-panel id='page_content' main class='flex' fixed>
                 <paper-toolbar id='page_header' shadow$='[[headerShadow]]'>
                     <paper-icon-button id='drawer_toggle' icon='menu' paper-drawer-toggle></paper-icon-button>
-                    <span class='paper-font-headline'>{{headerTitle}}</span>
-                    <paper-icon-button icon='[[helpIcon]]' class='help_icon' on-tap='gotoHeaderSection'></paper-icon-button>
+                    <span class='paper-font-headline'>[[headerTitle]]</span>
+                    <template is='dom-repeat' items='[[settings.quick_lookups.header]]' as='lookup'>
+                        <quick-lookup title='[[lookup]]' lookup-event='[[quickLookupEvent]]'></quick-lookup>
+                    </template>
                 </paper-toolbar>
                 <div>
                     <paper-toolbar id='page_banner' class='tall'>
@@ -134,13 +149,16 @@
                                 <span class='accented'>Design</span>
                                 Of This Site
                             </h2>
-                            <div class='spacer'></div>
-                            <paper-icon-button icon='[[helpIcon]]' class='help_icon' on-tap='gotoBannerSection'></paper-icon-button>
+                            <div class='quick_lookup_container'>
+                                <template is='dom-repeat' items='[[settings.quick_lookups.banner]]' as='lookup'>
+                                    <quick-lookup title='[[lookup]]' lookup-event='[[quickLookupEvent]]'></quick-lookup>
+                                </template>
+                            </div>
                         </div>
                     </paper-toolbar>
                     <div id='sections'>
                         <template is='dom-repeat' items='[[settings.sections]]' as='section'>
-                            <dots-section id='[[titleToID(section.title)]]' title='[[section.title]]' url='[[section.url]]' help-icon='[[helpIcon]]' help-event='[[sectionHelpIconEvent]]'></dots-section>
+                            <dots-section id='[[titleToID(section.title)]]' title='[[section.title]]' url='[[section.url]]' quick-lookups='[[settings.quick_lookups.sections]]' lookup-event='[[quickLookupEvent]]'></dots-section>
                         </template>
                     </div>
                     <div id='return_button_container' onscreen$="[[returnButtonActive]]">
@@ -169,26 +187,49 @@
             listeners: {
                 'page_content.content-scroll': 'onScroll'
             },
-            
+
             ready: function() {
                 var self = this;
 
-                DOTSGlobal.XMLGetRequest("/json/sections.json", function(data){
-                    self.async(function() {
-                        this.set("settings", JSON.parse(data));
-                        this.async(function(){
-                            var parts = window.location.href.split('#');
-                            
-                            if (parts.length != 2 || !parts[1]) return;
-                            var section = this.$$("#" + parts[1]);
+                DOTSGlobal.XMLGetRequest("/json/settings.json", function(data){
+                    var settings = JSON.parse(data);
 
-                            if (section) this.gotoSection(section);
-                        });
+                    // for each section in quick_lookups, switch lookups from section short names to titles.
+                    for (var section in settings.quick_lookups) {
+                        var lookups = settings.quick_lookups[section];
+                        for (var i = 0; i != lookups.length; ++i) {
+                            lookups[i] = settings.quick_lookups_titles[lookups[i]];
+                        }
+                    }
+
+                    self.async(function() {
+                        this.set("settings", settings);
+                        
+                        var parts = window.location.href.split('#');
+                            
+                        if (parts.length != 2 || !parts[1]) return;
+
+                        var waitTime = 100;
+
+                        var gotoSectionInURL = function(){                            
+                            var section = this.$$("#" + parts[1]);
+                            if (!section) return;
+
+                            if (section.loaded) {
+                                this.gotoSection(section);
+                            } else {
+                                waitTime *= 2;
+                                // console.log("Not yet loaded, waiting "+waitTime+" ms...");
+                                this.async(gotoSectionInURL, waitTime);
+                            }
+                        }
+
+                        this.async(gotoSectionInURL);
                     });
                 });
 
-                this.sectionHelpIconEvent = "section_help_icon_tapped";
-                this.listen(this, this.sectionHelpIconEvent, 'gotoSectionsSection');
+                this.quickLookupEvent = "quick_lookup_tapped";
+                this.listen(this, this.quickLookupEvent, 'quickLookupTapped');
             },
 
             gotoTop: function() {
@@ -196,25 +237,13 @@
                 this.gotoSection(this.$.page_banner, "");
             },
 
-            gotoBannerSection: function() {
-                this.quickLookup("banner");
+            quickLookupTapped: function(evt) {
+                this.quickLookup(evt.detail);
             },
 
-            gotoHeaderSection: function() {
-                this.quickLookup("header");
-            },
-
-            gotoDrawerSection: function() {
+            quickLookup: function(title) {
                 this.$.page_sidebar.closeDrawer();
-                this.quickLookup("sidebar");
-            },
-
-            gotoSectionsSection: function() {
-                this.quickLookup("sections");
-            },
-
-            quickLookup: function(name) {
-                var id = this.titleToID(this.settings.quick_lookups[name]);
+                var id = this.titleToID(title);
                 this.gotoSection(this.$$("#"+id), id);
             },
 

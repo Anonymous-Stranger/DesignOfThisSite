@@ -1,11 +1,23 @@
 {
     "quick_lookups": {
-        "header": "Header",
+        "banner": ["banner", "material_design", "colors"],
+        "header": ["header"],
+        "sections": ["sections", "story_mode", "material_design", "writing_style", "header", "urls"],
+        "sidebar": ["sidebar", "reference_mode", "material_design", "sections"]
+    },
+    "quick_lookups_titles": {
         "banner": "Banner",
-        "sidebar": "Sidebar",
-        "sections": "Sections",
+        "colors": "Color Scheme",
+        "header": "Header",
+        "material_design": "Material Design",
         "quick_lookups": "Quick Lookups",
-        "return_button": "Return Button"
+        "return_button": "Return Button",
+        "reference_mode": "Reference Mode",
+        "sections": "Sections",
+        "sidebar": "Sidebar",
+        "story_mode": "Story Mode",
+        "urls": "URLs",
+        "writing_style": "Writing Style"
     },
     "sections": [
         {
@@ -33,12 +45,12 @@
             "url": "mkd/communication.mkd"
         },
         {
-            "title": "Typography",
-            "url": "mkd/typography.mkd"
+            "title": "Font",
+            "url": "mkd/font.mkd"
         },
         {
             "title": "Banner",
-            "url": "mkd/banner.html"
+            "url": "mkd/banner.mkd"
         },
         {
             "title": "Header",

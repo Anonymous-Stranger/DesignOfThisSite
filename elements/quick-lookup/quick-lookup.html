@@ -1,0 +1,45 @@
+
+<link rel='import' href='../../bower_components/polymer/polymer.html'/>
+
+<link rel='import' href='../../bower_components/paper-button/paper-button.html'/>
+<link rel='import' href='../../bower_components/iron-icon/iron-icon.html'/>
+<link rel='import' href='../../bower_components/iron-icons/iron-icons.html'/>
+
+<dom-module id='quick-lookup'>
+
+	<template>
+		<style>
+			paper-button {
+				margin: 0;
+				font-size: 12px;
+			}
+
+			iron-icon {
+				--iron-icon-height: 16px;
+				--iron-icon-width: 16px;
+			}
+		</style>
+
+		<paper-button on-tap='onTap'>
+			<iron-icon icon='help'></iron-icon>
+			<span>{{title}}</span>
+		</paper-button>
+	</template>
+
+	<script>
+		Polymer({
+			
+			is: "quick-lookup",
+			
+			properties: {
+				title: String,
+				lookupEvent: String
+			},
+
+			onTap: function(evt) {
+				this.fire(this.lookupEvent, this.title);
+			}
+		});
+	</script>
+
+</dom-module>
