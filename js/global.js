@@ -54,9 +54,8 @@ DOTSGlobal.urlEncode = function(params) {
 	}
 
 	return encoded;
-
-
 }
+
 DOTSGlobal.__createXMLRequest = function(type, url, onSuccess) {
 	
 	var request = new XMLHttpRequest();
