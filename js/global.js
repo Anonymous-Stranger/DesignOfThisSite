@@ -1,7 +1,7 @@
 
 if (typeof(DOTSGlobal) === 'undefined') DOTSGlobal = {};
 
-DOTSGlobal.rootURL = "./";
+DOTSGlobal.rootURL = "/DesignOfThisSite/";
 
 DOTSGlobal.XMLGetRequest = function(url, onSuccess, params) {
 	
