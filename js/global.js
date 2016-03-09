@@ -1,6 +1,8 @@
 
 if (typeof(DOTSGlobal) === 'undefined') DOTSGlobal = {};
 
+DOTSGlobal.rootURL = "/MetaDesign/";
+
 DOTSGlobal.XMLGetRequest = function(url, onSuccess, params) {
 	
 	if (params && params.length > 0) url += "?" + DOTSGlobal.urlEncode(params);

@@ -221,7 +221,7 @@
             ready: function() {
                 var self = this;
 
-                DOTSGlobal.XMLGetRequest("/json/settings.json", function(data){
+                DOTSGlobal.XMLGetRequest(DOTSGlobal.rootURL+"json/settings.json", function(data){
                     var settings = JSON.parse(data);
 
                     // for each section in quick_lookups, switch lookups from section short names to titles.
